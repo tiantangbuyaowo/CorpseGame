@@ -8,10 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.google.common.eventbus.Subscribe;
 import lombok.extern.slf4j.Slf4j;
 import org.tj.game.MyCorpseGame;
-import org.tj.game.actor.SunFlowerActor;
+import org.tj.game.actor.PeaseActor;
 import org.tj.game.actor.base.AnimationAtor;
+import org.tj.game.event.PeaseCreateEvent;
 import org.tj.game.res.Res;
 
 @Slf4j
@@ -22,17 +24,28 @@ public class GameScreen implements Screen {
     private Stage stage;
 
     public GameScreen(MyCorpseGame myCorpseGame) {
+
+        MyCorpseGame.EVENTBUS.register(this);
+
+
         this.myCorpseGame = myCorpseGame;
+
+
         Texture bk = Res.assetManager.get(Res.BK_PATH);
         Image backImage = new Image(bk);
-        backImage.setHeight(bk.getHeight());
-        backImage.setWidth(bk.getWidth());
+        backImage.setHeight(Gdx.graphics.getHeight());
+        backImage.setWidth(Gdx.graphics.getHeight() * (bk.getWidth() / bk.getHeight()));
+
+        Texture chose = Res.assetManager.get(Res.CHOSE_PATH);
+        Image choseImage = new Image(chose);
+        choseImage.setY(Gdx.graphics.getHeight() - choseImage.getHeight());
+
         stage = new Stage();
         stage.addActor(backImage);
-
+        stage.addActor(choseImage);
 
         Gdx.input.setInputProcessor(stage);
-        stage.addListener(new MyInputListener());
+        backImage.addListener(new MyInputListener());
 /*        for (int i = 4; i >= 0; i--) {
             SunFlowerActor flowerActor = new SunFlowerActor(40, 30 + i * 50);
             flowerActor.setName("flower" + i);
@@ -57,7 +70,7 @@ public class GameScreen implements Screen {
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             //AnimationAtor flowerActor = new AnimationAtor(Res.SUNFLOWER_PATH, x - 40, y - 10);
-            AnimationAtor pease = new AnimationAtor(Res.PEASE_PATH, x - 40, y - 10);
+            AnimationAtor pease = new PeaseActor(Res.PEASE_PATH, x - 40, y - 10);
             //flowerActor.setName("flower" + i);
             stage.addActor(pease);
         }
@@ -107,6 +120,21 @@ public class GameScreen implements Screen {
             return false;
         }
     }
+
+
+    /**
+     * 豌豆射手监听事件
+     *
+     * @param peaseCreateEvent 消息
+     */
+    @Subscribe
+    public void createBullet(PeaseCreateEvent peaseCreateEvent) {
+        Image bullet = new Image((Texture) Res.assetManager.get(Res.BULLET_PATH));
+        bullet.setX(peaseCreateEvent.getActor().getX() + 60);
+        bullet.setY(peaseCreateEvent.getActor().getY() + 40);
+        stage.addActor(bullet);
+    }
+
 
     @Override
     public void show() {
