@@ -13,6 +13,8 @@ public class PeaseActor extends AnimationAtor {
 
     public PeaseActor(String[] animationFile, float x, float y) {
         super(animationFile, x, y);
+        //发送一个产生子弹的事件
+        MyCorpseGame.EVENTBUS.post(new PeaseCreateEvent(this));
     }
 
     @Override
@@ -20,8 +22,7 @@ public class PeaseActor extends AnimationAtor {
         super.draw(batch, parentAlpha);
 
 
-        //发送一个产生子弹的事件
-        MyCorpseGame.EVENTBUS.post(new PeaseCreateEvent(this));
+
 
     }
 }

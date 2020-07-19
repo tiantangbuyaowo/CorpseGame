@@ -6,39 +6,47 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import lombok.NoArgsConstructor;
 import org.tj.game.res.Res;
+
 
 public class AnimationAtor extends Actor {
 
 
-    Texture[] walkFrames;
+    protected TextureRegion[] walkFrames;
     // 摇头动画
-    private Animation walkAnimation;
+    protected Animation walkAnimation;
 
-    private Texture currentFrame;
+    protected TextureRegion currentFrame;
 
     // 状态时间, 渲染时间步 delta 的累加值
     private float stateTime;
 
 
     public AnimationAtor(String[] animationFile, float x, float y) {
-        walkFrames = new Texture[animationFile.length];
+        this(animationFile, x, y, 0, 0);
+    }
+
+    public AnimationAtor(String[] animationFile, float x, float y, float textureRegionx, float textureRegiony) {
+        walkFrames = new TextureRegion[animationFile.length];
         for (int i = 0; i < animationFile.length; i++) {
-            walkFrames[i] = Res.assetManager.get(animationFile[i], Texture.class);
+            //如果有宽度就截取，否则就按所有的长度来
+            Texture texture = Res.assetManager.get(animationFile[i], Texture.class);
+            walkFrames[i] = new TextureRegion(texture, (int) textureRegionx, (int) textureRegiony, texture.getWidth(), texture.getHeight());
+
         }
-        walkAnimation = new Animation(0.2F, walkFrames);
+        walkAnimation = new Animation(0.3F, walkFrames);
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
         this.setX(x);
         this.setY(y);
         //设置演员的尺寸
-        this.setSize(walkFrames[0].getWidth(), walkFrames[0].getHeight());
+        this.setSize(walkFrames[0].getRegionWidth(), walkFrames[0].getRegionHeight());
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
         if (null == walkFrames || !isVisible()) {
             return;
         }
@@ -46,7 +54,7 @@ public class AnimationAtor extends Actor {
         stateTime += Gdx.graphics.getDeltaTime();
 
         // 根据当前 播放模式 获取当前关键帧, 就是在 stateTime 这个时刻应该播放哪一帧
-        currentFrame = (Texture) walkAnimation.getKeyFrame(stateTime);
+        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime);
 
         batch.draw(new TextureRegion(currentFrame), getX(), getY(),
                 getOriginX(), getOriginY(),

@@ -4,15 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.google.common.eventbus.Subscribe;
 import lombok.extern.slf4j.Slf4j;
 import org.tj.game.MyCorpseGame;
+import org.tj.game.actor.BulletActor;
+import org.tj.game.actor.CorpseActor;
 import org.tj.game.actor.PeaseActor;
 import org.tj.game.actor.base.AnimationAtor;
+import org.tj.game.event.GameStageRemoveActorEvent;
 import org.tj.game.event.PeaseCreateEvent;
 import org.tj.game.res.Res;
 
@@ -46,15 +52,11 @@ public class GameScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
         backImage.addListener(new MyInputListener());
-/*        for (int i = 4; i >= 0; i--) {
-            SunFlowerActor flowerActor = new SunFlowerActor(40, 30 + i * 50);
-            flowerActor.setName("flower" + i);
-            stage.addActor(flowerActor);
 
-        }
-        Array<Actor> actors = stage.getActors();
-        System.out.println(actors.get(0).getZIndex());*/
 
+        //增加僵尸
+        AnimationAtor corpseActor = new CorpseActor(Res.CORPSE_WALK_PASH, MyCorpseGame.WORLD_WIDTH-1000, 45, 70, 0);
+        stage.addActor(corpseActor);
 
     }
 
@@ -69,9 +71,7 @@ public class GameScreen implements Screen {
          */
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            //AnimationAtor flowerActor = new AnimationAtor(Res.SUNFLOWER_PATH, x - 40, y - 10);
             AnimationAtor pease = new PeaseActor(Res.PEASE_PATH, x - 40, y - 10);
-            //flowerActor.setName("flower" + i);
             stage.addActor(pease);
         }
 
@@ -122,20 +122,6 @@ public class GameScreen implements Screen {
     }
 
 
-    /**
-     * 豌豆射手监听事件
-     *
-     * @param peaseCreateEvent 消息
-     */
-    @Subscribe
-    public void createBullet(PeaseCreateEvent peaseCreateEvent) {
-        Image bullet = new Image((Texture) Res.assetManager.get(Res.BULLET_PATH));
-        bullet.setX(peaseCreateEvent.getActor().getX() + 60);
-        bullet.setY(peaseCreateEvent.getActor().getY() + 40);
-        stage.addActor(bullet);
-    }
-
-
     @Override
     public void show() {
 
@@ -171,4 +157,23 @@ public class GameScreen implements Screen {
     public void dispose() {
 
     }
+
+
+    //eventbus事件
+
+    /**
+     * 产生豌豆射手监听事件
+     *
+     * @param peaseCreateEvent 消息
+     */
+    @Subscribe
+    public void createBullet(PeaseCreateEvent peaseCreateEvent) {
+
+        //在场景中生成一个子弹
+        BulletActor bullet = new BulletActor((PeaseActor) peaseCreateEvent.getActor());
+        stage.addActor(bullet);
+
+    }
+
+
 }

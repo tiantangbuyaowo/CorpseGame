@@ -38,5 +38,10 @@ public interface Res {
      */
     String BULLET_PATH = ROOT_PATH + "fight/bullet.png";
 
+    /**
+     * 移动僵尸图片资源
+     */
+    String[] CORPSE_WALK_PASH = {ROOT_PATH + "zombies/zombies_1/walk/z_1_01.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_02.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_03.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_04.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_05.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_06.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_07.png"};
+
 
 }
