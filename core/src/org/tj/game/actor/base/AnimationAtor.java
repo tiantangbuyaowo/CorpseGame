@@ -28,11 +28,23 @@ public class AnimationAtor extends Actor {
     }
 
     public AnimationAtor(String[] animationFile, float x, float y, float textureRegionx, float textureRegiony) {
+        initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony);
+    }
+
+    /**
+     * 初始化一下动画
+     * @param animationFile
+     * @param x
+     * @param y
+     * @param textureRegionx
+     * @param textureRegiony
+     */
+    private void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony) {
         walkFrames = new TextureRegion[animationFile.length];
         for (int i = 0; i < animationFile.length; i++) {
             //如果有宽度就截取，否则就按所有的长度来
             Texture texture = Res.assetManager.get(animationFile[i], Texture.class);
-            walkFrames[i] = new TextureRegion(texture, (int) textureRegionx, (int) textureRegiony, texture.getWidth(), texture.getHeight());
+            walkFrames[i] = new TextureRegion(texture, textureRegionx, textureRegiony, texture.getWidth(), texture.getHeight());
 
         }
         walkAnimation = new Animation(0.3F, walkFrames);

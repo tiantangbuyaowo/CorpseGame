@@ -8,6 +8,11 @@ import org.tj.game.actor.base.AnimationAtor;
  */
 public class CorpseActor extends AnimationAtor {
 
+
+
+    private String status = "";
+
+
     /**
      * 僵尸水平移动速度, px/s
      */

@@ -42,6 +42,10 @@ public interface Res {
      * 移动僵尸图片资源
      */
     String[] CORPSE_WALK_PASH = {ROOT_PATH + "zombies/zombies_1/walk/z_1_01.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_02.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_03.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_04.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_05.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_06.png", ROOT_PATH + "zombies/zombies_1/walk/z_1_07.png"};
+ /**
+     * 有头僵尸攻击图片资源
+     */
+    String[] CORPSE_HEAD_ATTACK_PASH = {ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_01.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_02.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_03.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_04.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_05.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_06.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_07.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_08.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_09.png", ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_10.png"};
 
 
 }

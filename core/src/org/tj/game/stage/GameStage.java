@@ -47,6 +47,10 @@ public class GameStage extends Stage {
         AnimationAtor corpseActor = new CorpseActor(Res.CORPSE_WALK_PASH, MyCorpseGame.WORLD_WIDTH - 1000, 45, 70, 0);
         this.addActor(corpseActor);
 
+        //增加僵尸
+        AnimationAtor corpseAttachActor = new CorpseActor(Res.CORPSE_HEAD_ATTACK_PASH, MyCorpseGame.WORLD_WIDTH - 1000, 45 + MapPoint.height, 0, 0);
+        this.addActor(corpseAttachActor);
+
 
     }
 
