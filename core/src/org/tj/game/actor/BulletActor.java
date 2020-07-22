@@ -4,11 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.google.common.eventbus.EventBus;
 import org.tj.game.MyCorpseGame;
-import org.tj.game.event.GameStageRemoveActorEvent;
-import org.tj.game.event.PeaseCreateEvent;
 import org.tj.game.res.Res;
 
 /**
@@ -28,9 +24,12 @@ public class BulletActor extends Actor {
      */
     private PeaseActor peaseActor;
 
+    private LineMapGroup lineMapGroup;
+
     private Texture bullet;
 
-    public BulletActor(PeaseActor peaseActor) {
+    public BulletActor(PeaseActor peaseActor, LineMapGroup lineMapGroup) {
+        this.lineMapGroup = lineMapGroup;
         this.peaseActor = peaseActor;
         bullet = Res.assetManager.get(Res.BULLET_PATH);
         this.setX(peaseActor.getX() + 60);
@@ -54,9 +53,11 @@ public class BulletActor extends Actor {
             this.setVisible(false);
             //MyCorpseGame.EVENTBUS.post(new GameStageRemoveActorEvent(this));
             this.remove();
+            //System.out.println(this.getParent());
             //如果豌豆射手还在，同时再产生一个子弹
             if (null != peaseActor && peaseActor.isVisible()) {
-                MyCorpseGame.EVENTBUS.post(new PeaseCreateEvent(peaseActor));
+                lineMapGroup.removeActor(this);
+                lineMapGroup.addActor(new BulletActor(peaseActor, lineMapGroup));
             }
             return;
         }
