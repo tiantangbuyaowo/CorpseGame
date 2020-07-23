@@ -1,6 +1,7 @@
 package org.tj.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.eventbus.EventBus;
 import org.tj.game.res.Res;
@@ -26,6 +27,17 @@ public class MyCorpseGame extends Game {
      * 初始化资源
      */
     private void initResource() {
+        initImage();
+        initMusic();
+        Res.assetManager.finishLoading();
+    }
+
+    private void initMusic() {
+        Res.assetManager.load(Res.BGM, Music.class);
+        Res.assetManager.load(Res.ADDPLANT, Music.class);
+    }
+
+    private void initImage() {
         Res.assetManager.load(Res.BK_PATH, Texture.class);
         Res.assetManager.load(Res.CHOSE_PATH, Texture.class);
         //向日葵
@@ -50,8 +62,6 @@ public class MyCorpseGame extends Game {
          * 豌豆射手的子弹
          */
         Res.assetManager.load(Res.BULLET_PATH, Texture.class);
-
-        Res.assetManager.finishLoading();
     }
 
 
