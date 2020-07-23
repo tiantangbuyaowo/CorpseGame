@@ -56,6 +56,16 @@ public interface Res {
      */
     String[] CORPSE_HEAD_ATTACK_PASH = {IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_06.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_07.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_08.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_09.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack/z_1_attack_10.png"};
 
+    /**
+     * 僵尸头掉下来的动画
+     */
+    //String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_06.png"};
+    String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png"};
+
+    /**
+     * 无头移动的僵尸
+     */
+    String[] CORPSE_LOST_HEAD_WALK = {IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_06.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_07.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_08.png", IMAGE_ROOT_PATH + "zombies/zombies_1/work_losthead/z_1_losthead_09.png"};
 
     //音乐
 
@@ -84,5 +94,10 @@ public interface Res {
      */
     String ATTACHCORPSE = MUSIC_ROOT_PATH + "/attachcorpse.mp3";
 
+
+    /**
+     * 吃植物的声音
+     */
+    String EATPLANT = MUSIC_ROOT_PATH + "/eatplant.mp3";
 
 }

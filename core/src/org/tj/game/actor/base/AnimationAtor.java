@@ -32,6 +32,7 @@ public class AnimationAtor extends Actor {
         initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony);
     }
 
+
     /**
      * 初始化一下动画
      *
@@ -42,6 +43,19 @@ public class AnimationAtor extends Actor {
      * @param textureRegiony
      */
     protected void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony) {
+        this.initAnimation(animationFile, x, y, textureRegionx, textureRegiony, Animation.PlayMode.LOOP, 0.3f);
+    }
+
+    /**
+     * 初始化一下动画
+     *
+     * @param animationFile
+     * @param x
+     * @param y
+     * @param textureRegionx
+     * @param textureRegiony
+     */
+    protected void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony, Animation.PlayMode PlayMode, float frameDuration) {
         walkFrames = new TextureRegion[animationFile.length];
         for (int i = 0; i < animationFile.length; i++) {
             //如果有宽度就截取，否则就按所有的长度来
@@ -49,8 +63,8 @@ public class AnimationAtor extends Actor {
             walkFrames[i] = new TextureRegion(texture, textureRegionx, textureRegiony, texture.getWidth(), texture.getHeight());
 
         }
-        walkAnimation = new Animation(0.3F, walkFrames);
-        walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        walkAnimation = new Animation(frameDuration, walkFrames);
+        walkAnimation.setPlayMode(PlayMode);
         this.setX(x);
         this.setY(y);
         //设置演员的尺寸
@@ -69,7 +83,7 @@ public class AnimationAtor extends Actor {
 
         // 根据当前 播放模式 获取当前关键帧, 就是在 stateTime 这个时刻应该播放哪一帧
         currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime);
-
+        //System.out.println(walkAnimation.getKeyFrameIndex(stateTime));
         batch.draw(new TextureRegion(currentFrame), getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
@@ -82,5 +96,6 @@ public class AnimationAtor extends Actor {
     public void act(float delta) {
         super.act(delta);
     }
+
 
 }

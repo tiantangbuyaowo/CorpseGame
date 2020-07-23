@@ -1,8 +1,10 @@
 package org.tj.game.actor;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import lombok.Getter;
+import lombok.Setter;
 import org.tj.game.MyCorpseGame;
 import org.tj.game.actor.base.AnimationAtor;
 import org.tj.game.model.CorpseActorStatus;
@@ -31,11 +33,14 @@ public class CorpseActor extends AnimationAtor {
 
     private LineMapGroup lineMapGroup;
 
+    private boolean test = false;
 
     /**
      * 僵尸有10点血
      */
-    private int Hp = 10;
+    @Setter
+    @Getter
+    private int Hp = 5;
 
     private Music walkBellow = Res.assetManager.get(Res.CORPSEBELLOW, Music.class);
 
@@ -57,11 +62,18 @@ public class CorpseActor extends AnimationAtor {
 
     }
 
+
     @Override
     public void act(float delta) {
         if (isVisible()) {
             //如果是在走的状态
             if (corpseActorStatus.equals(CorpseActorStatus.WALK) || corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) {
+                /*if (this.getHp() <= 4 && corpseActorStatus.equals(CorpseActorStatus.WALK)) {//血量到达了4,但是还是有头，就要播放掉头动画
+                    super.initAnimation(Res.CORPSE_HEAD_DOWN,
+                            getX(), getY(), 70, 0, Animation.PlayMode.NORMAL, 1f);
+                    corpseActorStatus = CorpseActorStatus.LOSTHEADWALK;
+                }*/
+
                 /**
                  * 移动起来
                  */
@@ -96,12 +108,18 @@ public class CorpseActor extends AnimationAtor {
         if (this.corpseActorStatus.equals(CorpseActorStatus.WALK)) { //有头
             super.initAnimation(Res.CORPSE_HEAD_ATTACK_PASH, getX(), getY(), 0, 0);
             this.corpseActorStatus = CorpseActorStatus.EAT;
-
-
         } else if (this.corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) { //没头
 
         }
     }
 
 
+    /**
+     * 僵尸受伤扣除hp
+     */
+    public synchronized void hurt() {
+        if (this.Hp > 0) {
+            this.setHp(this.getHp() - 1);
+        }
+    }
 }

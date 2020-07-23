@@ -94,6 +94,7 @@ public class BulletActor extends Actor {
             //子弹碰到了僵尸
             if (this.getRectangle().overlaps(corpseActors.getRectangle())) {
                 Res.assetManager.get(Res.ATTACHCORPSE, Music.class).play();
+                corpseActors.hurt();
                 this.setVisible(false);
                 this.remove();
             }

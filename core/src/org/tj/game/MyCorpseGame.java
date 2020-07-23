@@ -67,7 +67,14 @@ public class MyCorpseGame extends Game {
         for (String name : Res.CORPSE_HEAD_ATTACK_PASH) {
             Res.assetManager.load(name, Texture.class);
         }
-
+        //僵尸脑袋落地
+        for (String name : Res.CORPSE_HEAD_DOWN) {
+            Res.assetManager.load(name, Texture.class);
+        }
+        //僵尸无头移动
+        for (String name : Res.CORPSE_LOST_HEAD_WALK) {
+            Res.assetManager.load(name, Texture.class);
+        }
         /**
          * 豌豆射手的子弹
          */

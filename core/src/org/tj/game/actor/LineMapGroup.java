@@ -90,9 +90,11 @@ public class LineMapGroup extends Group {
         }
 
 
-        //增加僵尸
-        AnimationAtor corpseActor = new CorpseActor(this, Res.CORPSE_WALK_PASH, WIDTH * 8, 0, 70, 0);
-        this.addActor(corpseActor);
+        if (0 == lineIndex) {
+            //增加僵尸
+            AnimationAtor corpseActor = new CorpseActor(this, Res.CORPSE_WALK_PASH, WIDTH * 8, 0, 70, 0);
+            this.addActor(corpseActor);
+        }
 
 /*        //增加僵尸
         AnimationAtor corpseAttachActor = new CorpseActor(Res.CORPSE_HEAD_ATTACK_PASH, width * 7, 0, 0, 0);
