@@ -1,5 +1,7 @@
 package org.tj.game.actor;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import lombok.Getter;
@@ -11,7 +13,9 @@ import org.tj.game.model.MapPoint;
 import org.tj.game.res.Res;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -103,6 +107,8 @@ public class LineMapGroup extends Group {
         if (actor instanceof BulletActor) {
             this.getBulletActors().add((BulletActor) actor);
         } else if (actor instanceof PeaseActor) {
+            //播放安放植物的音乐
+            Res.assetManager.get(Res.ADDPLANT, Music.class).play();
             this.getPeaseActorss().add((PeaseActor) actor);
         } else if (actor instanceof CorpseActor) {
             this.getCorpseActors().add((CorpseActor) actor);
@@ -129,5 +135,37 @@ public class LineMapGroup extends Group {
 
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
 
+
+        //碰撞检测
+
+        //子弹和僵尸的检测
+        BulletAndCorpseCollide();
+    }
+
+
+    private void BulletAndCorpseCollide() {
+        corpseActors.forEach(corpseActors -> {
+            List<BulletActor> newBullets = new ArrayList<>();
+
+            //先找出来碰撞的
+            for (BulletActor bulletActor : bulletActors) {
+                //子弹碰到了僵尸
+                if (bulletActor.getRectangle().overlaps(corpseActors.getRectangle())) {
+                    Res.assetManager.get(Res.ATTACHCORPSE, Music.class).play();
+                    newBullets.add(bulletActor);
+                }
+            }
+
+            //然后删掉
+            for (int i = 0; i < newBullets.size(); i++) {
+                bulletActors.remove(newBullets.get(i));
+                newBullets.get(i).remove();
+            }
+
+        });
+    }
 }

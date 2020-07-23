@@ -33,8 +33,16 @@ public class MyCorpseGame extends Game {
     }
 
     private void initMusic() {
+        //背景音乐
         Res.assetManager.load(Res.BGM, Music.class);
+        //种植物
         Res.assetManager.load(Res.ADDPLANT, Music.class);
+        //僵尸吼叫
+        Res.assetManager.load(Res.CORPSEBELLOW, Music.class);
+        //吐出子弹
+        Res.assetManager.load(Res.ADDBULLET, Music.class);
+        //子弹击中僵尸
+        Res.assetManager.load(Res.ATTACHCORPSE, Music.class);
     }
 
     private void initImage() {

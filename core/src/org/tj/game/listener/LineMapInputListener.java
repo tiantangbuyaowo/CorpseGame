@@ -35,12 +35,9 @@ public class LineMapInputListener extends InputListener {
             return;
         }
         //否则生成豌豆射手
-        AnimationAtor pease = new PeaseActor(Res.PEASE_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y);
+        AnimationAtor pease = new PeaseActor(Res.PEASE_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y, lineMapGroup);
         lineMapGroup.addActor(pease);
 
-
-        //增加一个子弹演员
-        lineMapGroup.addActor(new BulletActor((PeaseActor) pease, lineMapGroup));
 
     }
 

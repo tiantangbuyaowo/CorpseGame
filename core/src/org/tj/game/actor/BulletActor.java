@@ -1,9 +1,12 @@
 package org.tj.game.actor;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import lombok.Getter;
 import org.tj.game.MyCorpseGame;
 import org.tj.game.res.Res;
 
@@ -20,13 +23,20 @@ public class BulletActor extends Actor {
 
 
     /**
+     * 豌豆子弹的矩形框
+     */
+    @Getter
+    private Rectangle rectangle;
+    /**
      * 他需要知道自己属于哪个豌豆射手
      */
+    @Getter
     private PeaseActor peaseActor;
 
     private LineMapGroup lineMapGroup;
 
     private Texture bullet;
+
 
     public BulletActor(PeaseActor peaseActor, LineMapGroup lineMapGroup) {
         this.lineMapGroup = lineMapGroup;
@@ -36,7 +46,8 @@ public class BulletActor extends Actor {
         this.setY(peaseActor.getY() + 40);
         //设置演员的尺寸
         this.setSize(bullet.getWidth(), bullet.getHeight());
-
+        rectangle = new Rectangle(getX(), getY(), getWidth(), getHeight());
+        Res.assetManager.get(Res.ADDBULLET, Music.class).play();
 
     }
 
@@ -53,14 +64,16 @@ public class BulletActor extends Actor {
             this.setVisible(false);
             //MyCorpseGame.EVENTBUS.post(new GameStageRemoveActorEvent(this));
             this.remove();
-            //System.out.println(this.getParent());
+/*            //System.out.println(this.getParent());
             //如果豌豆射手还在，同时再产生一个子弹
             if (null != peaseActor && peaseActor.isVisible()) {
                 lineMapGroup.removeActor(this);
                 lineMapGroup.addActor(new BulletActor(peaseActor, lineMapGroup));
-            }
+            }*/
             return;
         }
+
+
         batch.draw(new TextureRegion(bullet), getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
@@ -75,6 +88,9 @@ public class BulletActor extends Actor {
              * 移动起来
              */
             setX(getX() + delta * BulletActor.moveVelocity);
+            //动态更新他的位置框
+            rectangle.setX(getX());
+            //System.out.println(getX());
         }
     }
 

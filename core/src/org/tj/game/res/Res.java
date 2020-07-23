@@ -73,5 +73,16 @@ public interface Res {
      */
     String CORPSEBELLOW = MUSIC_ROOT_PATH + "/corpsebellow.mp3";
 
+    /**
+     * 添加子弹
+     */
+    String ADDBULLET = MUSIC_ROOT_PATH + "/bullet.mp3";
+
+
+    /**
+     * 子弹击中僵尸
+     */
+    String ATTACHCORPSE = MUSIC_ROOT_PATH + "/attachcorpse.mp3";
+
 
 }

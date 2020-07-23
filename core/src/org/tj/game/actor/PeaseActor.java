@@ -8,9 +8,18 @@ import org.tj.game.actor.base.AnimationAtor;
  */
 public class PeaseActor extends AnimationAtor {
 
+    /**
+     * 上次产生子弹的时间
+     */
+    private float lastCreatebullet = 0f;
 
-    public PeaseActor(String[] animationFile, float x, float y) {
+    private LineMapGroup lineMapGroup;
+
+
+    public PeaseActor(String[] animationFile, float x, float y, LineMapGroup lineMapGroup) {
         super(animationFile, x, y);
+        this.lineMapGroup = lineMapGroup;
+
 
     }
 
@@ -21,5 +30,20 @@ public class PeaseActor extends AnimationAtor {
 
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
 
+        lastCreatebullet = lastCreatebullet + delta;
+
+
+        //两秒
+        if ((lastCreatebullet - delta) >= 2f) {
+            lastCreatebullet = 0;
+            //增加一个子弹演员
+            this.lineMapGroup.addActor(new BulletActor(this, lineMapGroup));
+        }
+
+
+    }
 }
