@@ -31,12 +31,16 @@ public class CorpseActor extends AnimationAtor {
 
     private LineMapGroup lineMapGroup;
 
+
     /**
      * 僵尸有10点血
      */
     private int Hp = 10;
 
     private Music walkBellow = Res.assetManager.get(Res.CORPSEBELLOW, Music.class);
+
+
+    private Music eatMusic = Res.assetManager.get(Res.EATPLANT, Music.class);
 
 
     public CorpseActor(LineMapGroup lineMapGroup, String[] animationFile, float x, float y, float textureRegionx, float textureRegiony) {
@@ -67,7 +71,7 @@ public class CorpseActor extends AnimationAtor {
 
                 for (PeaseActor peaseActor : lineMapGroup.getPeaseActorss()) {
                     //发生了碰撞
-                    if (peaseActor.getRectangle().contains(this.getX(), this.getY())) {
+                    if (peaseActor.getRectangle().overlaps(this.getRectangle())) {
                         //如果碰到了植物
                         changStatus();
                         break;
@@ -86,11 +90,18 @@ public class CorpseActor extends AnimationAtor {
      * 改变僵尸的状态
      */
     private void changStatus() {
+        walkBellow.pause();
+        eatMusic.setLooping(true);
+        eatMusic.play();
         if (this.corpseActorStatus.equals(CorpseActorStatus.WALK)) { //有头
             super.initAnimation(Res.CORPSE_HEAD_ATTACK_PASH, getX(), getY(), 0, 0);
             this.corpseActorStatus = CorpseActorStatus.EAT;
+
+
         } else if (this.corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) { //没头
 
         }
     }
+
+
 }

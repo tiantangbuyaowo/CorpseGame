@@ -43,6 +43,8 @@ public class MyCorpseGame extends Game {
         Res.assetManager.load(Res.ADDBULLET, Music.class);
         //子弹击中僵尸
         Res.assetManager.load(Res.ATTACHCORPSE, Music.class);
+        //吃植物
+        Res.assetManager.load(Res.EATPLANT, Music.class);
     }
 
     private void initImage() {
