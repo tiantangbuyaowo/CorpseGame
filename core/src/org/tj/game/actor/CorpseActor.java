@@ -33,6 +33,7 @@ public class CorpseActor extends AnimationAtor {
 
     private LineMapGroup lineMapGroup;
 
+    private float anim_time;
     private boolean test = false;
 
     /**
@@ -66,13 +67,28 @@ public class CorpseActor extends AnimationAtor {
     @Override
     public void act(float delta) {
         if (isVisible()) {
+
+            if (test) {
+                anim_time = anim_time + delta;
+                if (walkAnimation.isAnimationFinished(anim_time)) { //结束了
+                    super.initAnimation(Res.CORPSE_LOST_HEAD_WALK,
+                            getX(), getY(), 0, 0);
+                    test = false;
+                } else {
+                    return;
+                }
+            }
+
             //如果是在走的状态
             if (corpseActorStatus.equals(CorpseActorStatus.WALK) || corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) {
-                /*if (this.getHp() <= 4 && corpseActorStatus.equals(CorpseActorStatus.WALK)) {//血量到达了4,但是还是有头，就要播放掉头动画
+                if (this.getHp() <= 4 && corpseActorStatus.equals(CorpseActorStatus.WALK)) {//血量到达了4,但是还是有头，就要播放掉头动画
                     super.initAnimation(Res.CORPSE_HEAD_DOWN,
-                            getX(), getY(), 70, 0, Animation.PlayMode.NORMAL, 1f);
+                            getX(), getY(), 70, 0, Animation.PlayMode.LOOP, 1f);
                     corpseActorStatus = CorpseActorStatus.LOSTHEADWALK;
-                }*/
+                    test = true;
+                    anim_time = 0;
+                    return;
+                }
 
                 /**
                  * 移动起来
