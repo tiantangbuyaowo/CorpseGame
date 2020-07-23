@@ -54,6 +54,10 @@ public class BulletActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
+
+        BulletAndCorpseCollide();
+
+
         //如果是不显示了，就结束
         if (!isVisible()) {
             return;
@@ -79,6 +83,21 @@ public class BulletActor extends Actor {
                 getWidth(), getHeight(),
                 getScaleX(), getScaleY(),
                 getRotation());
+    }
+
+    /**
+     * 子弹和僵尸的碰撞检测
+     */
+    private void BulletAndCorpseCollide() {
+        lineMapGroup.getCorpseActors().forEach(corpseActors -> {
+
+            //子弹碰到了僵尸
+            if (this.getRectangle().overlaps(corpseActors.getRectangle())) {
+                Res.assetManager.get(Res.ATTACHCORPSE, Music.class).play();
+                this.setVisible(false);
+                this.remove();
+            }
+        });
     }
 
     @Override

@@ -41,7 +41,7 @@ public class AnimationAtor extends Actor {
      * @param textureRegionx
      * @param textureRegiony
      */
-    private void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony) {
+    protected void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony) {
         walkFrames = new TextureRegion[animationFile.length];
         for (int i = 0; i < animationFile.length; i++) {
             //如果有宽度就截取，否则就按所有的长度来
