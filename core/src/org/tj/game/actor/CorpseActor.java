@@ -10,6 +10,8 @@ import org.tj.game.actor.base.AnimationAtor;
 import org.tj.game.model.CorpseActorStatus;
 import org.tj.game.res.Res;
 
+import static org.tj.game.actor.LineMapGroup.WIDTH;
+
 /**
  * 僵尸
  */
@@ -19,6 +21,7 @@ public class CorpseActor extends AnimationAtor {
     /**
      * 僵尸状态，默认移动状态
      */
+    @Setter
     private CorpseActorStatus corpseActorStatus = CorpseActorStatus.WALK;
     /**
      * 僵尸的矩形框
@@ -34,7 +37,6 @@ public class CorpseActor extends AnimationAtor {
     private LineMapGroup lineMapGroup;
 
     private float anim_time;
-    private boolean test = false;
 
     /**
      * 僵尸有10点血
@@ -48,6 +50,20 @@ public class CorpseActor extends AnimationAtor {
 
     private Music eatMusic = Res.assetManager.get(Res.EATPLANT, Music.class);
 
+
+    public CorpseActor(LineMapGroup lineMapGroup, String[] animationFile, float x, float y, float textureRegionx, float textureRegiony, Animation.PlayMode PlayMode, float frameDuration) {
+        super(animationFile, x, y, textureRegionx, textureRegiony, PlayMode, frameDuration);
+
+
+        this.lineMapGroup = lineMapGroup;
+
+        walkBellow.setLooping(true);
+        walkBellow.setVolume(0.2f);
+        walkBellow.play();
+        rectangle = new Rectangle(getX() + 40, getY(), getWidth() - 40, getHeight());
+
+
+    }
 
     public CorpseActor(LineMapGroup lineMapGroup, String[] animationFile, float x, float y, float textureRegionx, float textureRegiony) {
         super(animationFile, x, y, textureRegionx, textureRegiony);
@@ -68,26 +84,31 @@ public class CorpseActor extends AnimationAtor {
     public void act(float delta) {
         if (isVisible()) {
 
-            if (test) {
+            if (corpseActorStatus.equals(CorpseActorStatus.HEADDOWN)) { //正在脑袋落地
                 anim_time = anim_time + delta;
-                if (walkAnimation.isAnimationFinished(anim_time)) { //结束了
-                    super.initAnimation(Res.CORPSE_LOST_HEAD_WALK,
-                            getX(), getY(), 0, 0);
-                    test = false;
+                if (walkAnimation.isAnimationFinished(anim_time)) { //如果结束了
+                    this.lineMapGroup.getCorpseActors().remove(this);
+                    this.remove();
+                    CorpseActor corpseActor = new CorpseActor(lineMapGroup, Res.CORPSE_LOST_HEAD_WALK, getX(), getY(), 0, 0);
+                    corpseActor.setHp(this.getHp());
+                    corpseActor.setCorpseActorStatus(CorpseActorStatus.LOSTHEADWALK);
+                    lineMapGroup.addActor(corpseActor);
                 } else {
+                    //继续播放
                     return;
                 }
             }
 
+
             //如果是在走的状态
             if (corpseActorStatus.equals(CorpseActorStatus.WALK) || corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) {
                 if (this.getHp() <= 4 && corpseActorStatus.equals(CorpseActorStatus.WALK)) {//血量到达了4,但是还是有头，就要播放掉头动画
-                    super.initAnimation(Res.CORPSE_HEAD_DOWN,
-                            getX(), getY(), 70, 0, Animation.PlayMode.LOOP, 1f);
-                    corpseActorStatus = CorpseActorStatus.LOSTHEADWALK;
-                    test = true;
-                    anim_time = 0;
-                    return;
+                    this.lineMapGroup.getCorpseActors().remove(this);
+                    this.remove();
+                    CorpseActor corpseActor = new CorpseActor(lineMapGroup, Res.CORPSE_HEAD_DOWN, getX(), getY(), 70, 5, Animation.PlayMode.NORMAL, 0.3f);
+                    corpseActor.setHp(this.getHp());
+                    corpseActor.setCorpseActorStatus(CorpseActorStatus.HEADDOWN);
+                    lineMapGroup.addActor(corpseActor);
                 }
 
                 /**
@@ -108,7 +129,9 @@ public class CorpseActor extends AnimationAtor {
 
 
                 //吃植物
-            } else if (corpseActorStatus.equals(CorpseActorStatus.EAT) || corpseActorStatus.equals(CorpseActorStatus.LOSTHEADEAT)) {
+            } else if (corpseActorStatus.equals(CorpseActorStatus.EAT)) {
+
+            } else if (corpseActorStatus.equals(CorpseActorStatus.LOSTHEADEAT)) {
 
             }
         }
@@ -122,10 +145,11 @@ public class CorpseActor extends AnimationAtor {
         eatMusic.setLooping(true);
         eatMusic.play();
         if (this.corpseActorStatus.equals(CorpseActorStatus.WALK)) { //有头
-            super.initAnimation(Res.CORPSE_HEAD_ATTACK_PASH, getX(), getY(), 0, 0);
+            super.initAnimation(Res.CORPSE_HEAD_ATTACK, getX(), getY(), 0, 0);
             this.corpseActorStatus = CorpseActorStatus.EAT;
         } else if (this.corpseActorStatus.equals(CorpseActorStatus.LOSTHEADWALK)) { //没头
-
+            super.initAnimation(Res.CORPSE_LOST_HEAD_ATTACK, getX(), getY(), 0, 0);
+            this.corpseActorStatus = CorpseActorStatus.LOSTHEADEAT;
         }
     }
 

@@ -64,7 +64,7 @@ public class MyCorpseGame extends Game {
         }
 
         //有头的攻击僵尸
-        for (String name : Res.CORPSE_HEAD_ATTACK_PASH) {
+        for (String name : Res.CORPSE_HEAD_ATTACK) {
             Res.assetManager.load(name, Texture.class);
         }
         //僵尸脑袋落地
@@ -73,6 +73,10 @@ public class MyCorpseGame extends Game {
         }
         //僵尸无头移动
         for (String name : Res.CORPSE_LOST_HEAD_WALK) {
+            Res.assetManager.load(name, Texture.class);
+        }
+        //僵尸无头攻击
+        for (String name : Res.CORPSE_LOST_HEAD_ATTACK) {
             Res.assetManager.load(name, Texture.class);
         }
         /**

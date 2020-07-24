@@ -32,6 +32,10 @@ public class AnimationAtor extends Actor {
         initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony);
     }
 
+    public AnimationAtor(String[] animationFile, float x, float y, float textureRegionx, float textureRegiony, Animation.PlayMode playMode, float frameDuration) {
+        this.initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony, playMode, frameDuration);
+    }
+
 
     /**
      * 初始化一下动画
