@@ -59,8 +59,8 @@ public interface Res {
     /**
      * 僵尸头掉下来的动画
      */
-    //String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_06.png"};
-    String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png"};
+    String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_06.png"};
+    //String[] CORPSE_HEAD_DOWN = {IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/head/z_1_head_04.png"};
 
     /**
      * 无头移动的僵尸
@@ -74,6 +74,11 @@ public interface Res {
      * 僵尸死去
      */
     String[] CORPSE_DIE = {IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_06.png"};
+    /**
+     * 向日葵选择
+     */
+    String FLOWER_CHOSE = IMAGE_ROOT_PATH + "fight/chose/choose_default02.png";
+
 
     //音乐
 

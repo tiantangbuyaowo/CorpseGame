@@ -4,7 +4,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import lombok.extern.slf4j.Slf4j;
-import org.tj.game.actor.BulletActor;
 import org.tj.game.actor.LineMapGroup;
 import org.tj.game.actor.PeaseActor;
 import org.tj.game.actor.base.AnimationAtor;
