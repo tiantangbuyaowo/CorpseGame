@@ -90,7 +90,7 @@ public class LineMapGroup extends Group {
         }
 
 
-        if (0 == lineIndex) {
+        if (0 == 0) {
             //增加僵尸
             AnimationAtor corpseActor = new CorpseActor(this, Res.CORPSE_WALK_PASH, WIDTH * 8, 0, 70, 0);
             this.addActor(corpseActor);
@@ -127,6 +127,9 @@ public class LineMapGroup extends Group {
      * @return
      */
     public synchronized MapPoint getClickPoint(float x, float y) {
+        if (y > HEIGHT) {
+            return null;
+        }
         //算出索引
         int index = (int) (x / WIDTH);
         if (!mapPoints[index].isHasPlant()) { //还没有植物了

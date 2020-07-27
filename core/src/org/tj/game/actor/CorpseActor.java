@@ -76,6 +76,13 @@ public class CorpseActor extends AnimationAtor {
 
     }
 
+    @Override
+    public boolean remove() {
+        //this.eatMusic.dispose();
+        //this.walkBellow.dispose();
+        return super.remove();
+
+    }
 
     @Override
     public void act(float delta) {
@@ -88,6 +95,7 @@ public class CorpseActor extends AnimationAtor {
             } else if (this.corpseActorStatus.equals(CorpseActorStatus.DIE)) { //是死亡状态了
                 anim_time = anim_time + delta;
                 if (walkAnimation.isAnimationFinished(anim_time)) { //动画结束了
+                    this.eatMusic.dispose();
                     this.lineMapGroup.getCorpseActors().remove(this);
                     this.remove();
                     this.setVisible(false);
@@ -200,4 +208,5 @@ public class CorpseActor extends AnimationAtor {
 
         }
     }
+
 }
