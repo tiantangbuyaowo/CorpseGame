@@ -79,6 +79,10 @@ public class MyCorpseGame extends Game {
         for (String name : Res.CORPSE_LOST_HEAD_ATTACK) {
             Res.assetManager.load(name, Texture.class);
         }
+        //僵尸死去
+        for (String name : Res.CORPSE_DIE) {
+            Res.assetManager.load(name, Texture.class);
+        }
         /**
          * 豌豆射手的子弹
          */

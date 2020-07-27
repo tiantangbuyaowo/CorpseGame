@@ -91,6 +91,9 @@ public class BulletActor extends Actor {
     private void BulletAndCorpseCollide() {
         lineMapGroup.getCorpseActors().forEach(corpseActors -> {
 
+            if (corpseActors.getHp() == 0) { //僵尸血量已经为0
+                return;
+            }
             //子弹碰到了僵尸
             if (this.getRectangle().overlaps(corpseActors.getRectangle())) {
                 Res.assetManager.get(Res.ATTACHCORPSE, Music.class).play();

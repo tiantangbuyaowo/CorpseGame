@@ -7,5 +7,5 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum CorpseActorStatus {
-    WALK, EAT, HEADDOWN, LOSTHEADWALK, LOSTHEADEAT, DIE;
+    WALK, EAT, WALK_TO_HEADDOWN, EAT_TO_HEADDOWN, LOSTHEADWALK, LOSTHEADEAT, DIE;
 }

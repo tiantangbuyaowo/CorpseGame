@@ -70,6 +70,10 @@ public interface Res {
      * 无头攻击的僵尸
      */
     String[] CORPSE_LOST_HEAD_ATTACK = {IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_06.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_07.png", IMAGE_ROOT_PATH + "zombies/zombies_1/attack_losthead/z_1_attack_losthead_08.png"};
+    /**
+     * 僵尸死去
+     */
+    String[] CORPSE_DIE = {IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_01.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_02.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_03.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_04.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_05.png", IMAGE_ROOT_PATH + "zombies/zombies_1/die/z_1_die_06.png"};
 
     //音乐
 
