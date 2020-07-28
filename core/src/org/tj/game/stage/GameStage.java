@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.tj.game.actor.BackImageActor;
 import org.tj.game.actor.LineMapGroup;
-import org.tj.game.actor.PlanChoseBkGroup;
+import org.tj.game.actor.PlantChoseBkGroup;
 import org.tj.game.listener.LineMapInputListener;
 import org.tj.game.res.Res;
 
@@ -16,6 +16,7 @@ import org.tj.game.res.Res;
 @Slf4j
 public class GameStage extends Stage {
 
+    public static int currentPlantType = 0;
 
     public GameStage() {
 
@@ -23,7 +24,7 @@ public class GameStage extends Stage {
         BackImageActor backImage = new BackImageActor(bk, 0, 0);
 
 
-        PlanChoseBkGroup planChoseGroup = new PlanChoseBkGroup();
+        PlantChoseBkGroup planChoseGroup = new PlantChoseBkGroup();
 
 
         this.addActor(backImage);

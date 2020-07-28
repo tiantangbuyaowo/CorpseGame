@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import org.tj.game.listener.PlantChoseListener;
 import org.tj.game.res.Res;
 
-public class PlanChoseBkGroup extends Group {
+public class PlantChoseBkGroup extends Group {
 
 
     //private
@@ -14,7 +15,7 @@ public class PlanChoseBkGroup extends Group {
     private Image backImage;
 
 
-    public PlanChoseBkGroup() {
+    public PlantChoseBkGroup() {
         init();
     }
 
@@ -32,7 +33,15 @@ public class PlanChoseBkGroup extends Group {
         Image image = new Image(Res.assetManager.get(Res.FLOWER_CHOSE, Texture.class));
         image.setX(75);
         image.setY(10);
+        image.addListener(new PlantChoseListener(0));
         this.addActor(image);
+
+        //选择豌豆射手
+        Image peaseImage = new Image(Res.assetManager.get(Res.PEASE_CHOSE, Texture.class));
+        peaseImage.setX(75 + image.getWidth() + 10);
+        peaseImage.setY(10);
+        peaseImage.addListener(new PlantChoseListener(1));
+        this.addActor(peaseImage);
 
     }
 }

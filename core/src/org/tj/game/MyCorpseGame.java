@@ -49,6 +49,7 @@ public class MyCorpseGame extends Game {
 
     private void initImage() {
         Res.assetManager.load(Res.BK_PATH, Texture.class);
+        Res.assetManager.load(Res.PEASE_CHOSE, Texture.class);
         Res.assetManager.load(Res.CHOSE_PATH, Texture.class);
         Res.assetManager.load(Res.FLOWER_CHOSE, Texture.class);
         //向日葵

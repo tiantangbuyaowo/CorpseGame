@@ -9,6 +9,7 @@ import org.tj.game.actor.PeaseActor;
 import org.tj.game.actor.base.AnimationAtor;
 import org.tj.game.model.MapPoint;
 import org.tj.game.res.Res;
+import org.tj.game.stage.GameStage;
 
 /**
  * 行级地图点击事件
@@ -34,7 +35,17 @@ public class LineMapInputListener extends InputListener {
             return;
         }
         //否则生成豌豆射手
-        AnimationAtor pease = new PeaseActor(Res.PEASE_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y, lineMapGroup);
+        AnimationAtor pease = null;
+        switch (GameStage.currentPlantType) {
+            case 0:
+                pease = new AnimationAtor(Res.SUNFLOWER_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y);
+
+                break;
+            case 1:
+                pease = new PeaseActor(Res.PEASE_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y, lineMapGroup);
+                break;
+        }
+
         lineMapGroup.addActor(pease);
 
 

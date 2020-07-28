@@ -77,7 +77,11 @@ public interface Res {
     /**
      * 向日葵选择
      */
-    String FLOWER_CHOSE = IMAGE_ROOT_PATH + "fight/chose/choose_default02.png";
+    String FLOWER_CHOSE = IMAGE_ROOT_PATH + "Cards/card_sunflower.png";
+  /**
+     * 向日葵选择
+     */
+    String PEASE_CHOSE = IMAGE_ROOT_PATH + "Cards/card_peashooter.png";
 
 
     //音乐

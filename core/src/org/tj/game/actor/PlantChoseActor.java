@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 /**
  * 植物选择的演员
  */
-public class PlantChostActor extends Actor {
+public class PlantChoseActor extends Actor {
 
 
     private Image image;
 
-    public PlantChostActor() {
+    public PlantChoseActor() {
     }
 
     @Override

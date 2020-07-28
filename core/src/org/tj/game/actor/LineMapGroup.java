@@ -1,6 +1,7 @@
 package org.tj.game.actor;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -74,9 +75,10 @@ public class LineMapGroup extends Group {
         this.peaseActorss = new ArrayList<>();
 
         this.lineIndex = lineIndex;
+        //this.setColor(Color.BLUE);
         this.setX(LEFTX);
         this.setY(this.lineIndex * HEIGHT + DOWNY);
-        this.setSize(RIGHTX - LEFTX, UPY - DOWNY);
+        this.setSize(RIGHTX - LEFTX, HEIGHT);
         init();
     }
 
