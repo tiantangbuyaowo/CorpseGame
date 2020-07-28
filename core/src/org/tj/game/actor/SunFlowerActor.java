@@ -7,9 +7,9 @@ import org.tj.game.actor.base.AnimationAtor;
 import org.tj.game.actor.base.PlantParent;
 
 /**
- * 豌豆射手
+ * 向日葵
  */
-public class PeaseActor extends PlantParent {
+public class SunFlowerActor extends PlantParent {
 
     /**
      * 上次产生子弹的时间
@@ -17,11 +17,16 @@ public class PeaseActor extends PlantParent {
     private float lastCreatebullet = 0f;
 
     private LineMapGroup lineMapGroup;
+    /**
+     * 向日葵的矩形框
+     */
+    @Getter
+    private Rectangle rectangle;
 
-
-    public PeaseActor(String[] animationFile, float x, float y, LineMapGroup lineMapGroup) {
+    public SunFlowerActor(String[] animationFile, float x, float y, LineMapGroup lineMapGroup) {
         super(animationFile, x, y);
         this.lineMapGroup = lineMapGroup;
+        rectangle = new Rectangle(getX() + 40, getY(), getWidth() - 40, getHeight());
 
 
     }
@@ -44,7 +49,7 @@ public class PeaseActor extends PlantParent {
         if ((lastCreatebullet - delta) >= 2f) {
             lastCreatebullet = 0;
             //增加一个子弹演员
-            this.lineMapGroup.addActor(new BulletActor(this, lineMapGroup));
+            // this.lineMapGroup.addActor(new BulletActor(this, lineMapGroup));
         }
 
     }

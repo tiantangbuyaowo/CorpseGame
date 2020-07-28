@@ -25,29 +25,16 @@ public class AnimationAtor extends Actor {
 
 
     public AnimationAtor(String[] animationFile, float x, float y) {
+
         this(animationFile, x, y, 0, 0);
     }
 
     public AnimationAtor(String[] animationFile, float x, float y, float textureRegionx, float textureRegiony) {
-        initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony);
+        this(animationFile, x, y, (int) textureRegionx, (int) textureRegiony, Animation.PlayMode.LOOP, 0.3f);
     }
 
     public AnimationAtor(String[] animationFile, float x, float y, float textureRegionx, float textureRegiony, Animation.PlayMode playMode, float frameDuration) {
         this.initAnimation(animationFile, x, y, (int) textureRegionx, (int) textureRegiony, playMode, frameDuration);
-    }
-
-
-    /**
-     * 初始化一下动画
-     *
-     * @param animationFile
-     * @param x
-     * @param y
-     * @param textureRegionx
-     * @param textureRegiony
-     */
-    protected void initAnimation(String[] animationFile, float x, float y, int textureRegionx, int textureRegiony) {
-        this.initAnimation(animationFile, x, y, textureRegionx, textureRegiony, Animation.PlayMode.LOOP, 0.3f);
     }
 
     /**

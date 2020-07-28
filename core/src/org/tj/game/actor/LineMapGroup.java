@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.tj.game.MyCorpseGame;
 import org.tj.game.actor.base.AnimationAtor;
+import org.tj.game.actor.base.PlantParent;
 import org.tj.game.model.MapPoint;
 import org.tj.game.res.Res;
 
@@ -41,11 +42,18 @@ public class LineMapGroup extends Group {
     private int lineIndex;
 
     /**
-     * 当前行所拥有的射手
+     * 当前行所拥有的植物
      */
     @Getter
     @Setter
-    private List<PeaseActor> peaseActorss;
+    private List<PlantParent> peaseActorss;
+
+    /*    *//**
+     * 当前行所拥有的向日葵
+     *//*
+    @Getter
+    @Setter
+    private List<SunFlowerActor> sunFlowerActors;*/
 
 
     /**
@@ -73,6 +81,7 @@ public class LineMapGroup extends Group {
         // this.bulletActors = new ArrayList<>();
         this.corpseActors = new ArrayList<>();
         this.peaseActorss = new ArrayList<>();
+
 
         this.lineIndex = lineIndex;
         //this.setColor(Color.BLUE);
@@ -110,10 +119,10 @@ public class LineMapGroup extends Group {
 
         if (actor instanceof BulletActor) {
             // this.getBulletActors().add((BulletActor) actor);
-        } else if (actor instanceof PeaseActor) {
+        } else if (actor instanceof PlantParent) {
             //播放安放植物的音乐
             Res.assetManager.get(Res.ADDPLANT, Music.class).play();
-            this.getPeaseActorss().add((PeaseActor) actor);
+            this.getPeaseActorss().add((PlantParent) actor);
         } else if (actor instanceof CorpseActor) {
             this.getCorpseActors().add((CorpseActor) actor);
         }

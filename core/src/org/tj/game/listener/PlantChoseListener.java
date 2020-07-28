@@ -6,22 +6,21 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import lombok.extern.slf4j.Slf4j;
 import org.tj.game.actor.LineMapGroup;
 import org.tj.game.actor.PeaseActor;
-import org.tj.game.actor.SunFlowerActor;
 import org.tj.game.actor.base.AnimationAtor;
-import org.tj.game.actor.base.PlantParent;
 import org.tj.game.model.MapPoint;
 import org.tj.game.res.Res;
 import org.tj.game.stage.GameStage;
 
 /**
- * 行级地图点击事件
+ * 植物点击事件
  */
 @Slf4j
-public class LineMapInputListener extends InputListener {
-    private LineMapGroup lineMapGroup;
+public class PlantChoseListener extends InputListener {
 
-    public LineMapInputListener(LineMapGroup lineMapGroup) {
-        this.lineMapGroup = lineMapGroup;
+    private int type;
+
+    public PlantChoseListener(int type) {
+        this.type = type;
     }
 
     /**
@@ -29,27 +28,8 @@ public class LineMapInputListener extends InputListener {
      */
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-        MapPoint clickPoint = lineMapGroup.getClickPoint(x, y);
-
-        if (null == clickPoint) {
-            //没点到地图位置，或者里头已经有了植物，就啥也不干
-            return;
-        }
-        //否则生成豌豆射手
-        PlantParent pease = null;
-        switch (GameStage.currentPlantType) {
-            case 0:
-                pease = new SunFlowerActor(Res.SUNFLOWER_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y, lineMapGroup);
-
-                break;
-            case 1:
-                pease = new PeaseActor(Res.PEASE_PATH, clickPoint.getLeftDown().x, clickPoint.getLeftDown().y, lineMapGroup);
-                break;
-        }
-
-        lineMapGroup.addActor(pease);
-
+        log.error("touchUp: " + x + ", " + y + "; pointer: " + pointer);
+        GameStage.currentPlantType = type;
 
     }
 
